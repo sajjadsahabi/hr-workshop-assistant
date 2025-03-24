@@ -35,9 +35,9 @@ qa = ConversationalRetrievalChain.from_llm(
 
 
 # Streamlit UI
-st.set_page_config(page_title="HR Workshop Assistant")
-st.title("🧠 HR Workshop Assistant")
-st.markdown("Ask about HR workshop content and get suggestions from your documents.")
+st.set_page_config(page_title="Workshop Assistant")
+st.title("🧠 Workshop Assistant")
+st.markdown("Ask about workshop content and get suggestions from your documents.")
 
 query = st.text_input("Type your question:")
 
