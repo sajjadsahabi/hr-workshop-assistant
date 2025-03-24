@@ -4,7 +4,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
 
-# Load your OpenAI key securely
+# Load your OpenAI key securely test
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 # Load the FAISS index
@@ -13,8 +13,26 @@ vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deseri
 
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
+
+from langchain_core.messages import SystemMessage
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+# Add system context manually using chain config
+system_message = SystemMessage(
+    content="You are an HR workshop assistant. Answer only based on the user's uploaded workshop documents. Be focused, clear, and suggest specific documents when possible."
+)
+
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import ConversationalRetrievalChain
+prompt = ChatPromptTemplate.from_messages([
+    system_message,
+    ("human", "{question}")
+])
+qa = ConversationalRetrievalChain.from_llm(
+    llm=llm,
+    retriever=retriever,
+    condense_question_prompt=prompt
+)
+
 
 # Streamlit UI
 st.set_page_config(page_title="HR Workshop Assistant")
