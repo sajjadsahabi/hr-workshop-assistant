@@ -9,7 +9,8 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 # Load the FAISS index
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-vectorstore = FAISS.load_local("faiss_index", embeddings)
+vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
+
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
