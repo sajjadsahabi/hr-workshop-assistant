@@ -1,19 +1,16 @@
 import os
 import streamlit as st
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_chroma import Chroma
-from langchain_openai import ChatOpenAI
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
 
-# Set your OpenAI API key
-import streamlit as st
-import os
-
+# Load your OpenAI key securely
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
+# Load the FAISS index
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+vectorstore = FAISS.load_local("faiss_index", embeddings)
 
-# Load the Chroma database
-vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=OpenAIEmbeddings(model="text-embedding-3-small"))
 retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
