@@ -43,7 +43,12 @@ query = st.text_input("Type your question:")
 
 if query:
     with st.spinner("Thinking..."):
-        response = qa.invoke({"question": query})
+      
+        response = qa.invoke({
+            "question": query,
+        "chat_history": []
+        })
+
         st.markdown("### 🤖 Answer")
         st.write(response["answer"])
 
