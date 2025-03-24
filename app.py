@@ -18,7 +18,7 @@ from langchain_core.messages import SystemMessage
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 # Add system context manually using chain config
 system_message = SystemMessage(
-    content="You are an HR workshop assistant. Answer only based on the user's uploaded workshop documents. Be focused, clear, and suggest specific documents when possible."
+    content="You are an HR workshop assistant. Answer only based on the user's uploaded workshop documents. Be focused, clear, and suggest specific documents when possible. If you do not find a match in the documents, say 'I could not find anything in your materials.' Do not make up answers."
 )
 
 from langchain.prompts import ChatPromptTemplate
