@@ -54,7 +54,8 @@ if query:
 
         # 🤖 Show answer
         st.markdown("### 🤖 Answer")
-        st.write(response)
+        st.write(response.content)
+
 
         # 📄 Show sources
         if docs:
