@@ -12,7 +12,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 # Load the FAISS index
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
-retriever = vectorstore.as_retriever(search_kwargs={"k": 2})  # Try k=2 for better context
+retriever = vectorstore.as_retriever(search_kwargs={"k": 5})  # Try more k for better context
 
 # Define the system prompt
 system_message = SystemMessage(
