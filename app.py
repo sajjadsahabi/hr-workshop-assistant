@@ -54,6 +54,15 @@ query = st.text_input("Type your question:")
 
 if query:
     with st.spinner("Thinking..."):
+        # 🔍 Show which chunks are being retrieved
+        docs = retriever.get_relevant_documents(query)
+        st.markdown("### 🔍 Retrieved Chunks (for debugging)")
+        for i, doc in enumerate(docs, 1):
+            st.markdown(f"**Chunk {i}:**")
+            st.write(doc.page_content[:500])  # show first 500 characters
+            st.caption(f"📄 Source: {doc.metadata.get('source', 'Unknown file')}")
+
+        # 💬 Then pass to GPT
         response = qa.invoke({
             "question": query,
             "chat_history": []
@@ -61,6 +70,7 @@ if query:
 
         st.markdown("### 🤖 Answer")
         st.write(response.get("answer", "Sorry, I couldn't find an answer."))
+
 
         if "source_documents" in response:
             st.markdown("#### 📄 Sources")
