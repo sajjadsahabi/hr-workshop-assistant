@@ -58,13 +58,13 @@ if query:
 
 
         # 📄 Show relevant sources (without duplicates and cleaned up)
-if docs:
-    st.markdown("#### 📄 Relevant Sources")
-    seen = set()
-    for doc in docs:
-        raw_source = doc.metadata.get("source", "Unknown file")
-        source = raw_source.replace("downloaded_docs/", "")
-        if source not in seen:
-            st.write(f"- {source}")
-            seen.add(source)
+    if docs:
+        st.markdown("#### 📄 Relevant Sources")
+        seen = set()
+        for doc in docs:
+            raw_source = doc.metadata.get("source", "Unknown file")
+            source = raw_source.replace("downloaded_docs/", "")
+            if source not in seen:
+                st.write(f"- {source}")
+                seen.add(source)
 
