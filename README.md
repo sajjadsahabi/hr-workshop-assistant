@@ -126,4 +126,4 @@ This project is maintained by [@sajjadsahabi](https://github.com/sajjadsahabi) a
 
 ## 📃 License
 
-MIT License — free to use and modify.
+free to use and modify.
