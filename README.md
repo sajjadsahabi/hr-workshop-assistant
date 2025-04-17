@@ -17,6 +17,8 @@ Built with:
   - “What workshop covers conflict resolution?”
   - “Where can I find materials about leadership?”
 
+    
+
 - ✅ Returns an AI-generated **summary + suggested documents**
 - ✅ Works entirely through a **simple browser interface**
 - ✅ Can be easily updated with new documents (no tech knowledge needed by users)
