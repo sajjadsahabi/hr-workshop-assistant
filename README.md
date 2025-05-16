@@ -12,7 +12,7 @@ Built with:
 
 ## 🎯 What It Does
 
-- ✅ Let users ask **natural questions** like:
+- ✅ Let users ask **natural questions** like: 
   - “Do we have anything on employee engagement?”
   - “What workshop covers conflict resolution?”
   - “Where can I find materials about leadership?”
